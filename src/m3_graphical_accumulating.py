@@ -9,8 +9,8 @@ Additionally, it emphasizes that you must
 before you can implement a solution to the problem in Python.
 
 Authors: David Mutchler, Dave Fisher, Valerie Galluzzi, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Shuang Xia.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -53,7 +53,9 @@ def run_test_draw_parallel_lines():
     # Test 2:
     left_most_point = rg.Point(50, 200)
     draw_parallel_lines(4, left_most_point, 300, window1)
+    window1.render()
     window1.close_on_mouse_click()
+
 
     # ------------------------------------------------------------------
     # A third test on ANOTHER window.
@@ -64,7 +66,7 @@ def run_test_draw_parallel_lines():
     # Test 3:
     left_most_point = rg.Point(20, 20)
     draw_parallel_lines(12, left_most_point, 470, window2)
-
+    window2.render()
     window2.close_on_mouse_click()
 
 
@@ -96,7 +98,7 @@ def draw_parallel_lines(n, point, length, window):
       :type window: rg.RoseWindow
     """
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #          Tests have been written for you (above).
     #
     # CONSIDER using the ACCUMULATOR IN GRAPHICS pattern,
@@ -110,6 +112,9 @@ def draw_parallel_lines(n, point, length, window):
     ####################################################################
     # ------------------------------------------------------------------
 
+    for k in range(n):
+        line = rg.Line(rg.Point(point.x, point.y + k * 30), rg.Point(point.x+length, point.y + k * 30))
+        line.attach_to(window)
 
 def run_test_draw_lines():
     """ Tests the   draw_lines  function. """
@@ -125,11 +130,13 @@ def run_test_draw_lines():
 
     draw_lines(4, rg.Point(20, 120), window1)
     draw_lines(12, rg.Point(150, 230), window1)
+    window1.render()
     window1.close_on_mouse_click()
 
     # A third test on ANOTHER window.
     window2 = rg.RoseWindow(350, 300, 'Test 3 of DRAW_LINES:  7 lines!')
     draw_lines(7, rg.Point(50, 120), window2)
+    window2.render()
     window2.close_on_mouse_click()
 
 
@@ -161,7 +168,7 @@ def draw_lines(n, point, window):
       :type window: rg.RoseWindow
     """
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #          Tests have been written for you (above).
     #
     # CONSIDER using the ACCUMULATOR IN GRAPHICS pattern,
@@ -175,6 +182,9 @@ def draw_lines(n, point, window):
     ####################################################################
     # ------------------------------------------------------------------
 
+    for k in range(n):
+        line = rg.Line(point, rg.Point(point.x + 100, point.y - 100 + (200/(n-1))* k))
+        line.attach_to(window)
 
 # ----------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
