@@ -95,9 +95,8 @@ def sum_more_cosines(m, n):
          which is approximately 0.02082.
     """
     count = 0
-    for k in range(m, n):
-        if math.cos(k+1) > 0:
-           count = count + 1
+    for k in range(n-m+1):
+        count = count + math.cos(k+m)
     return count
     # ------------------------------------------------------------------
     # DONE: 3. Implement and test this function.
@@ -178,8 +177,9 @@ def count_sines_from(m, n):
     """
 
     total = 0
-    for k in range (m, n):
-        total = total + math.sin(k)
+    for k in range (n - m + 1):
+        if math.sin(k + m) < 0.5:
+            total =total + 1
 
     return total
     # ------------------------------------------------------------------
@@ -208,8 +208,18 @@ def run_test_count_sines_vs_cosines():
     print('--------------------------------------------------')
 
     # Test 1:
-    expected = 100
-    answer = count_sines_vs_cosines(101)
+    expected = 6
+    answer = count_sines_vs_cosines(5)
+    print('Test 1 expected:', expected)
+    print('       actual:  ', answer)
+
+    expected = 0
+    answer = count_sines_vs_cosines(0)
+    print('Test 1 expected:', expected)
+    print('       actual:  ', answer)
+
+    expected = 1
+    answer = count_sines_vs_cosines(1)
     print('Test 1 expected:', expected)
     print('       actual:  ', answer)
 
@@ -218,6 +228,10 @@ def run_test_count_sines_vs_cosines():
     print('Test 1 expected:', expected)
     print('       actual:  ', answer)
 
+    expected = 0
+    answer = count_sines_vs_cosines(0)
+    print('Test 1 expected:', expected)
+    print('       actual:  ', answer)
     # ------------------------------------------------------------------
     # TO DO: 6 (continued).
     # Below this comment, add 5 more test cases of your own choosing.
@@ -248,8 +262,13 @@ def count_sines_vs_cosines(m):
       -- count_sines_vs_cosines(1) returns 1
       -- Also:  count_sines_vs_cosines(101) returns 100 (trust me!)
     """
+    total = 0
+    for k in range (2 * m +1):
+        if math.sin(k - m) > math.cos(k - m):
+            total = total + 1
+    return total
     # ------------------------------------------------------------------
-    # TODO: 7. Implement and test this function.
+    # DONE: 7. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     #
     # IMPORTANT: As in previous problems in this session,
